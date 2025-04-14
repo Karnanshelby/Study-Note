@@ -1,46 +1,52 @@
+// /api/index.js
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import { createServer } from "@vercel/node"; // Not required explicitly, Vercel handles this
 
-dotenv.config()
+// Import routes
+import authRouter from "../routes/auth.route.js";
+import noteRouter from "../routes/note.route.js";
 
-mongoose.connect(process.env.MONGO_URI).then(()=>{
-    console.log("Connected to mongoDB");
-}).catch((err)=>{
-    console.log(err)
-})
+dotenv.config();
 
-const app = express()
+const app = express();
 
-//to make input as json
-app.use(express.json())
-app.use(cookieParser())
-app.use(cors({origin: ["http://localhost:5173"], credentials: true}))
+app.use(express.json());
+app.use(cookieParser());
+app.use(cors({ origin: ["http://localhost:5173"], credentials: true }));
 
-app.listen(3000, ()=>{
-    console.log("server is running on port 3000");
-})
+// Connect to MongoDB once
+let isConnected = false;
+const connectDB = async () => {
+    if (isConnected) return;
+    try {
+        await mongoose.connect(process.env.MONGO_URI);
+        console.log("Connected to MongoDB");
+        isConnected = true;
+    } catch (err) {
+        console.error(err);
+    }
+};
 
-//import routes
-import authRouter from "./routes/auth.route.js";
-import noteRouter from "./routes/note.route.js";
+connectDB();
 
+app.use("/api/auth", authRouter);
+app.use("/api/note", noteRouter);
 
-app.use("/api/auth",authRouter)
-app.use("/api/note",noteRouter)
-
-
-//error handling
+// Error handler
 app.use((err, req, res, next) => {
-    const statuscode = err.statuscode || 500
-    const message = err.message || "internal server error"
+    const statuscode = err.statuscode || 500;
+    const message = err.message || "Internal server error";
 
     return res.status(statuscode).json({
-        sucess: false,
+        success: false,
         statuscode,
         message,
-    })
-})
+    });
+});
 
+// Export the app wrapped in a handler for Vercel
+export default app;
