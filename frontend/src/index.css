@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base{
+    html {
+        font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body {
+        background-image: url('/src/images/plain.jpg');
+        background-size: cover; 
+        background-position: top center;
+        overflow-x: hidden; 
+        background-attachment: fixed;
+    }
+    
+}
+
+@layer components {
+    .input-box{
+        @apply w-full text-sm bg-transparent border-[1.5px] px-5 py-3 rounded mb-4 outline-none;
+    }
+
+    .btn-primary {
+        @apply w-full text-sm bg-primary text-white p-2 rounded my-1 hover:bg-blue-700;
+    }
+
+    .icon-btn{
+        @apply text-xl text-slate-300 cursor-pointer hover:text-primary;
+    }
+
+    .input-label{
+        @apply text-xs text-slate-400
+    }
+
+}
+
+/* Breathing animation */
+/* Apply a wave breathing effect to individual letters */
+@keyframes letter-breathing {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+}
+
+.wave-text span {
+  display: inline-block;
+  animation: letter-breathing 3s ease-in-out infinite;
+  opacity: 0.9;
+  letter-spacing: 0.1em;
+}
+
+/* Add staggered delays to create the wave effect */
+.wave-text span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.wave-text span:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.wave-text span:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.wave-text span:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+.wave-text span:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+.wave-text span:nth-child(6) {
+  animation-delay: 0.5s;
+}
+
+.wave-text span:nth-child(7) {
+  animation-delay: 0.6s;
+}
+
+.wave-text span:nth-child(8) {
+  animation-delay: 0.7s;
+}
+
+.wave-text span:nth-child(9) {
+  animation-delay: 0.8s;
+}
+
+.wave-text span:nth-child(10) {
+  animation-delay: 0.9s;
+}
+
+.wave-text span:nth-child(11) {
+  animation-delay: 1s;
+}
+
+@layer components {
+  .glass-effect {
+    @apply bg-white/20 backdrop-blur-md shadow-lg border border-white/30 rounded-lg;
+  }
+}
