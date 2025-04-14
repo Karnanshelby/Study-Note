@@ -1,14 +1,11 @@
-// /api/index.js
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import { createServer } from "@vercel/node"; // Not required explicitly, Vercel handles this
 
-// Import routes
-import authRouter from "../routes/auth.route.js";
-import noteRouter from "../routes/note.route.js";
+import authRouter from "./routes/auth.route.js";
+import noteRouter from "./routes/note.route.js";
 
 dotenv.config();
 
@@ -30,7 +27,6 @@ const connectDB = async () => {
         console.error(err);
     }
 };
-
 connectDB();
 
 app.use("/api/auth", authRouter);
@@ -40,7 +36,6 @@ app.use("/api/note", noteRouter);
 app.use((err, req, res, next) => {
     const statuscode = err.statuscode || 500;
     const message = err.message || "Internal server error";
-
     return res.status(statuscode).json({
         success: false,
         statuscode,
@@ -48,5 +43,4 @@ app.use((err, req, res, next) => {
     });
 });
 
-// Export the app wrapped in a handler for Vercel
-export default app;
+export default app; // ✅ Vercel will use this
