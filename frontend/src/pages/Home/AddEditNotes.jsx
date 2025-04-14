@@ -15,7 +15,7 @@ const AddEditNotes = ({ onClose, noteData, type, getAllNotes  }) => {
     const noteId = noteData._id
 
     try {
-      const res = await axios.post("http://localhost:3000/api/note/edit/" + noteId,
+      const res = await axios.post("https://study-note-omega.vercel.app/api/note/edit/" + noteId,
         {title, content, tags},
         {withCredentials: true}
       )
@@ -40,7 +40,7 @@ const AddEditNotes = ({ onClose, noteData, type, getAllNotes  }) => {
 //add note
   const addNewNote = async () => {
     try {
-      const res = await axios.post("http://localhost:3000/api/note/add", 
+      const res = await axios.post("https://study-note-omega.vercel.app/api/note/add", 
         {title, content, tags}, {withCredentials: true})
 
         if(res.data.success === false){
