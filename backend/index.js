@@ -13,7 +13,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: ["https://study-note-omega.vercel.app/"], credentials: true }));
+app.use(cors({ origin: ["https://study-note-omega.vercel.app"], credentials: true }));
 
 // Connect to MongoDB once
 let isConnected = false;
