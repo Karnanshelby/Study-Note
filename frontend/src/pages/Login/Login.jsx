@@ -45,7 +45,7 @@ const Login = () => {
       dispatch(signInStart());
 
       const res = await axios.post(
-        "https://study-note-omega.vercel.app/api/auth/signin",
+        "https://study-note-a6r1.vercel.app/api/auth/signin",
         { email, password },
         { withCredentials: true }
       );

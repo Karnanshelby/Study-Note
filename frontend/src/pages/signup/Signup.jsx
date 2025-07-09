@@ -46,7 +46,7 @@ const Signup = () => {
 
     try {
       const res = await axios.post(
-        "https://study-note-omega.vercel.app/api/auth/signup",
+        "https://study-note-a6r1.vercel.app/api/auth/signup",
         { username: name, email, password },
         { withCredentials: true }
       );
